@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'generator_page.dart';
 import 'favorites_page.dart';
-
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -26,40 +24,70 @@ class _MyHomePageState extends State<MyHomePage> {
         throw UnimplementedError('no widget for $selectedIndex');
     }
 
-    return LayoutBuilder(builder: (context, constraints) {
-      return Scaffold(
-        body: Row(
-          children: [
-            SafeArea(
-              child: NavigationRail(
-                extended: false,
-                destinations: [
-                  NavigationRailDestination(
-                    icon: Icon(Icons.home),
-                    label: Text('Home'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.favorite),
-                    label: Text('Favorites'),
-                  ),
-                ],
-                selectedIndex: selectedIndex,
-                onDestinationSelected: (value) {
-                  setState(() {
-                    selectedIndex = value;
-                  });
-                },
-              ),
+    return Scaffold(
+      appBar: AppBar(title: const Text('Namer App')),
+      drawer: Drawer(
+        child: Container(
+          color: Theme.of(context).colorScheme.primaryContainer,
+          child: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text('Home'),
+                  onTap: () {
+                    setState(() {
+                      selectedIndex = 0;
+                    });
+                    Navigator.pop(context);
+                  },
+                  iconColor: Colors.white,
+                ),
+                ListTile(
+                  leading: Icon(Icons.favorite),
+                  title: Text('Favorites'),
+                  onTap: () {
+                    setState(() {
+                      selectedIndex = 1;
+                    });
+                    Navigator.pop(context);
+                  },
+                  iconColor: Colors.white,
+                ),
+              ],
             ),
-            Expanded(
-              child: Container(
-                color: Theme.of(context).colorScheme.primaryContainer,
-                child: page,
-              ),
-            ),
-          ],
+          ),
         ),
-      );
-    });
+      ),
+      body: Row(
+        children: [
+          Expanded(
+            child: Container(
+              color: Theme.of(context).colorScheme.primaryContainer,
+              child: page,
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        onTap: (index) {
+          setState(() {
+            selectedIndex = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favorites',
+          ),
+        ],
+      ),
+    );
   }
 }
