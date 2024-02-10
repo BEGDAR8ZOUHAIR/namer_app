@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'generator_page.dart';
 import 'favorites_page.dart';
+import '../widgets/bottom_navigation.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -70,23 +71,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex,
-        onTap: (index) {
+      bottomNavigationBar: BottomNavigation(
+        selectedIndex: selectedIndex,
+        onItemTapped: (idx) {
           setState(() {
-            selectedIndex = index;
+            selectedIndex = idx;
           });
         },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favorites',
-          ),
-        ],
       ),
     );
   }

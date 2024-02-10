@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:namer_app/components/big_card.dart';
+import 'package:namer_app/widgets/big_card.dart';
 import '../my_app_state.dart';
 
 class GeneratorPage extends StatelessWidget {
